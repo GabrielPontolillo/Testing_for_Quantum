@@ -25,7 +25,7 @@ class ProgramGenerator:
                     qubit_max = algorithm['qubit-max']
                     # I'm pretty sure this logic is slightly off come back later
                     if qubit_min <= self.min_qubits:
-                        if qubit_max is None or qubit_max >= self.max_qubits:
+                        if qubit_max is None or self.max_qubits is None or qubit_max >= self.max_qubits:
                             path_to_algorithm = os.path.join(relative_path, '..', algorithm['filename'])
                             shutil.copy(path_to_algorithm, "WorkingDirectory")
                             copied_programs += 1

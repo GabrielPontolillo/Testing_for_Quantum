@@ -7,6 +7,8 @@ from ProgramGeneration.ProgramGenerator import ProgramGenerator
 
 def empty_working_dir():
     relative_path = os.path.join(os.path.dirname(__file__), "WorkingDirectory")
+    if not os.path.isdir(relative_path):
+        os.makedirs(relative_path)
     paths = os.listdir(relative_path)
     for path in paths:
         if os.path.isdir(path):

@@ -1,8 +1,19 @@
 import argparse
-
 import os
 import sys
+import shutil
 from ProgramGeneration.ProgramGenerator import ProgramGenerator
+
+
+def empty_working_dir():
+    relative_path = os.path.join(os.path.dirname(__file__), "WorkingDirectory")
+    paths = os.listdir(relative_path)
+    for path in paths:
+        if os.path.isdir(path):
+            shutil.rmtree(os.path.join(relative_path, path))
+        else:
+            os.remove(os.path.join(relative_path, path))
+
 
 parser = argparse.ArgumentParser(description='Generate scripts for quantum programs')
 
@@ -12,11 +23,14 @@ parser.add_argument('--language', '-l', metavar='language', type=str, default='q
 parser.add_argument('--generate', '-g', action='store_true',
                     help='Generates quantum programs within specification')
 
-parser.add_argument('--number-of-programs', '-p', metavar='programNumber', type=int, default=2,
+parser.add_argument('--number-of-programs', '-p', metavar='programNumber', type=int, default=10,
                     help='Specify the number of programs to generate')
 
-parser.add_argument('--number-of-input-qubits', '-q', metavar='inputQubits', type=int, default=4,
-                    help='Specify the number of input qubits')
+parser.add_argument('--min-qubits', '--', metavar='min qubits', type=int, default=2,
+                    help='Specify the minimum number of qubits')
+
+parser.add_argument('--max-qubits', '-+', metavar='max qubits', type=int, default=None,
+                    help='Specify the maximum number of qubits')
 
 parser.add_argument('--test', '-t', action='store_true',
                     help='Executes test')
@@ -37,7 +51,10 @@ else:
     raise(RuntimeError("Please specify a programming language to generate tests with"))
 
 if args.generate:
-    print(args.number_of_input_qubits)
-    print(args.number_of_programs)
-    ProgramGenerator(args.number_of_input_qubits, args.number_of_programs).generate_circuits()
+    empty_working_dir()
+    ProgramGenerator(args.language, args.min_qubits, args.max_qubits, args.number_of_programs).generate_circuits()
+
+if args.delete:
+    empty_working_dir()
+
 

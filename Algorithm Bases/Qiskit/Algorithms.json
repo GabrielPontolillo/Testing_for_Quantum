@@ -1,0 +1,27 @@
+{
+   "Algorithms": [
+      {
+         "index": 1,
+         "name": "Quantum Fourier Transform",
+         "qubit-min": 1,
+         "qubit-max": null,
+         "filename": "QuantumFourierTransform.py"
+      },
+
+      {
+         "index": 2,
+         "name": "Quantum Phase Estimation",
+         "qubit-min": 2,
+         "qubit-max": null,
+         "filename": "QuantumPhaseEstimation.py"
+      },
+
+      {
+         "index": 3,
+         "name": "Superdense Coding",
+         "qubit-min": 2,
+         "qubit-max": 2,
+         "filename": "SuperdenseCoding.py"
+      }
+   ]
+}
